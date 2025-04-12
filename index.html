@@ -17,7 +17,7 @@
 
         <!-- Contenido del grimorio -->
         <h1 class="fade-in">Grimorio del Abismo</h1>
-        <h2 class="fade-in">ahl’Ruun — La Voz Que Devora</h2>
+        <p>Zahl'Ruun — La Voz Que Devora</p>
         
         <div class="sello-magico"></div>
         
@@ -26,7 +26,7 @@
             
             <div class="circulo-ritual">
                 <div class="runas-giratorias">
-                    <img src="grimorio del abismo.png">
+                    <img src="path/to/runa.png">
                 </div>
             </div>
             
@@ -38,28 +38,91 @@
         <div class="separador-ornamentado"></div>
 
         <ul class="lista-conjuros">
-            <li>Invocación de las Sombras</li>
-            <li>Ritual de la Luna Carmesí</li>
-            <li>Conjuro de los Elementos</li>
+            <li>Sha-vel’tahr-zunn — "Yo veo el fuego del abismo"</li>
+            <li>Zahl’kaarn-oth’lim — "Fragmento del consumido por el abismo"</li>
+            <li>Thyr’venn-xhul — "La sombra es silencio"</li>
+            <li>Vel’zor-bhoz — "Revelar el vacío que devora"</li>
         </ul>
 
         <div class="simbolo-arcano">☥</div>
 
-        <table class="tabla-mistica">
-            <tr>
-                <th>Luna</th>
-                <th>Elemento</th>
-                <th>Poder</th>
-            </tr>
-            <tr>
-                <td>Nueva</td>
-                <td>Agua</td>
-                <td>Purificación</td>
-            </tr>
-        </table>
+        <img src="path/to/grimorio del abismo.png" alt="Ilustración Mágica" class="ilustracion-magica marco-mistico">
 
-        <img src="path/to/magical-illustration.png" alt="Ilustración Mágica" class="ilustracion-magica marco-mistico">
-
+        <h1>✦ LIBRO I: DEL JURAMENTO, EL VACÍO Y SUS HIJOS</h1>
+        <nav>
+            <ul>
+                <li><a href="palabras-iniciales.html">Palabras Iniciales del Vacío</a></li>
+                <li><a href="juramento-lociam.html">Juramento del Lociam</a></li>
+                <li><a href="advertencia.html">Advertencia a los Profanos</a></li>
+                <li><a href="genesis.html">Génesis del Abismo</a></li>
+                <li><a href="nacimiento-culto.html">Nacimiento del Culto</a></li>
+                <li><a href="espectros.html">Los Espectros del Abismo</a></li>
+                
     </div>
+    <script>
+        function openChat() {
+          document.getElementById('overlay').style.display = 'block';
+          document.getElementById('chatModal').style.display = 'block';
+          document.body.style.overflow = 'hidden';
+        }
+    
+        function closeChat() {
+          document.getElementById('overlay').style.display = 'none';
+          document.getElementById('chatModal').style.display = 'none';
+          document.body.style.overflow = 'auto';
+        }
+    
+        document.getElementById('overlay').addEventListener('click', closeChat);
+    
+        function sendMessage() {
+          const input = document.getElementById('messageInput');
+          const message = input.value.trim();
+          
+          if (message) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageElement = document.createElement('div');
+            messageElement.className = 'message';
+            
+            const userElement = document.createElement('div');
+            userElement.className = 'message-user';
+            userElement.textContent = 'Iniciado';
+            
+            const textElement = document.createElement('div');
+            textElement.className = 'message-text';
+            textElement.textContent = message;
+            
+            messageElement.appendChild(userElement);
+            messageElement.appendChild(textElement);
+            
+            chatMessages.appendChild(messageElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            input.value = '';
+          }
+        }
+    
+        // Permitir enviar mensaje con Enter
+        document.getElementById('messageInput').addEventListener('keypress', function(e) {
+          if (e.key === 'Enter') {
+            sendMessage();
+          }
+        });
+    
+        // Efecto de aparición gradual para el contenido
+        document.addEventListener('DOMContentLoaded', function() {
+          const sections = document.querySelectorAll('.section');
+          sections.forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 1s ease, transform 1s ease';
+          });
+    
+          setTimeout(() => {
+            sections.forEach(section => {
+              section.style.opacity = '1';
+              section.style.transform = 'translateY(0)';
+            });
+          }, 500);
+        });
+      </script>
 </body>
 </html>
