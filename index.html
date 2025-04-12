@@ -51,11 +51,46 @@
                     <li><a href="genesis.html">⟁Génesis del Abismo</a></li>
                     <li><a href="nacimiento-culto.html">⟁Nacimiento del Culto</a></li>
                     <li><a href="espectros.html">⟁Los Espectros del Abismo</a></li>
+                    <li><a href="rituales-secretos.html">⟁Rituales Secretos del Abismo</a></li>
         </ul>
 
         <div class="simbolo-arcano">☥</div>
 
         <img src="grimorio del abismo.png" alt="Ilustración Mágica" class="ilustracion-magica marco-mistico">
+
+        <div class="chat-container">
+            <div id="overlay" class="overlay"></div>
+            <div id="chatModal" class="chat-modal">
+                <div class="chat-header">
+                    <h3>🕯️ Comunicación con el Abismo 🕯️</h3>
+                    <span class="close-btn" onclick="closeChat()">✧</span>
+                </div>
+                <div class="chat-rules">
+                    <p>⟁ Reglas del Canal Astral ⟁</p>
+                    <ul>
+                        <li>🌑 Habla solo en susurros del vacío</li>
+                        <li>👁️ No reveles tu verdadero nombre</li>
+                        <li>🔮 Usa los símbolos sagrados apropiados</li>
+                        <li>⚠️ No invoques espectros sin autorización</li>
+                        <li>🕯️ Mantén el respeto a los Lociam</li>
+                    </ul>
+                </div>
+                <div id="chatMessages" class="chat-messages">
+                    <div class="message system">
+                        <div class="message-text">El canal astral ha sido abierto...</div>
+                    </div>
+                    <div class="message">
+                        <div class="message-user">Lociam Veyirh</div>
+                        <div class="message-text">🕯️ Bienvenidos, iniciados. Que el Abismo guíe vuestros pensamientos.</div>
+                    </div>
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="messageInput" placeholder="Susurra al vacío...">
+                    <button onclick="sendMessage()">⟁</button>
+                </div>
+            </div>
+            <button class="open-chat-btn" onclick="openChat()">⟁ Canal Astral ⟁</button>
+        </div>
 
     </div>
     <script>
