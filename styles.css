@@ -1,10 +1,23 @@
-/* Estilos base del grimorio */
+/* Importar fuentes adicionales */
+@import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Almendra:ital,wght@0,400;0,700;1,400&family=Goudy+Old+Style&display=swap');
+
+/* Variables globales */
+:root {
+    --color-pergamino: #c8aa6e;
+    --color-tinta: #1a1209;
+    --color-sangre: #8b0000;
+    --color-oro: #a17f1a;
+    --color-sombra: #463521;
+}
+
+/* Estilos base mejorados */
 body {
     background-color: #000;
     background-image: 
-        url('data:image/svg+xml;charset=utf-8,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><path d="M50 50 L45 45 L55 45 Z" fill="%231a0000"/></svg>');
-    color: #c8aa6e;
-    font-family: "UnifrakturMaguntia", "Goudy Old Style", serif;
+        url('path/to/dark-texture.png'),
+        radial-gradient(circle at 50% 50%, #1a0000 0%, #000 100%);
+    color: var(--color-pergamino);
+    font-family: "Almendra", "Goudy Old Style", serif;
     margin: 0;
     padding: 40px 20px;
     line-height: 1.8;
@@ -12,281 +25,359 @@ body {
     position: relative;
 }
 
+/* Contenedor principal del grimorio */
 .grimorio {
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
-    background: #1a1209;
-    padding: 60px 40px;
-    border: 2px solid #463521;
+    background: var(--color-tinta);
+    padding: 80px 60px;
+    border: 3px solid var(--color-sombra);
     box-shadow: 
         0 0 0 10px #0a0705,
-        0 0 30px rgba(0,0,0,0.8);
+        0 0 30px rgba(0,0,0,0.8),
+        inset 0 0 50px rgba(0,0,0,0.5);
     position: relative;
     background-image: 
-        url('data:image/svg+xml;charset=utf-8,<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="200" fill="%231a1209" fill-opacity="0.7"/><path d="M0 0 L200 200 M200 0 L0 200" stroke="%23241810" stroke-width="1"/></svg>');
+        url('path/to/parchment-texture.png'),
+        url('path/to/magical-symbols.png');
+    background-blend-mode: multiply;
 }
 
+/* Marca de agua central */
 .grimorio::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url('data:image/svg+xml;charset=utf-8,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="1" fill="%23463521"/></svg>');
-    opacity: 0.1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 500px;
+    background-image: url('path/to/pentagram.svg');
+    opacity: 0.05;
     pointer-events: none;
 }
 
-/* Encabezados del grimorio */
+/* Bordes decorativos mejorados */
+.borde-decorativo {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+}
+
+.borde-tl { top: 0; left: 0; transform: translate(-20px, -20px); }
+.borde-tr { top: 0; right: 0; transform: translate(20px, -20px) rotate(90deg); }
+.borde-bl { bottom: 0; left: 0; transform: translate(-20px, 20px) rotate(-90deg); }
+.borde-br { bottom: 0; right: 0; transform: translate(20px, 20px) rotate(180deg); }
+
+/* Encabezados mejorados */
 h1 {
-    color: #8b0000;
-    font-size: 3em;
+    font-family: "UnifrakturMaguntia", serif;
+    font-size: 4em;
     text-align: center;
-    margin: 40px 0;
-    font-family: "UnifrakturMaguntia", "Goudy Old Style", serif;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-    letter-spacing: 3px;
+    margin: 60px 0;
+    color: var(--color-sangre);
+    text-shadow: 
+        2px 2px 4px rgba(0,0,0,0.5),
+        0 0 20px rgba(139,0,0,0.3);
     position: relative;
 }
 
-h1::before, h1::after {
-    content: '☽';
-    display: inline-block;
-    color: #8b0000;
-    margin: 0 20px;
-    font-size: 0.8em;
-    transform: rotate(270deg);
-}
-
-h2 {
-    color: #a17f1a;
-    font-size: 2em;
-    margin: 40px 0 20px;
-    text-align: center;
-    position: relative;
-}
-
-h2::before, h2::after {
+/* Símbolos alrededor del título */
+h1::before,
+h1::after {
     content: '';
     position: absolute;
+    width: 150px;
+    height: 3px;
+    background: linear-gradient(to var(--direction, right), 
+        transparent, 
+        var(--color-sangre),
+        transparent
+    );
     top: 50%;
-    width: 100px;
-    height: 2px;
-    background: linear-gradient(to var(--direction, right), #463521, transparent);
 }
 
-h2::before {
-    right: 100%;
-    margin-right: 20px;
+h1::before {
+    left: -180px;
     --direction: right;
 }
 
-h2::after {
-    left: 100%;
-    margin-left: 20px;
+h1::after {
+    right: -180px;
     --direction: left;
 }
 
-/* Texto y párrafos */
-p {
-    color: #c8aa6e;
-    text-align: justify;
-    margin: 25px 0;
-    line-height: 1.8;
-    font-size: 1.1em;
-    text-indent: 2em;
-}
-
-/* Letras capitulares */
-p:first-of-type::first-letter {
-    font-size: 3.5em;
-    float: left;
-    padding: 0.1em 0.1em 0 0;
-    color: #8b0000;
-    font-family: "UnifrakturMaguntia", serif;
-    line-height: 0.8;
-    margin-right: 0.1em;
-}
-
-/* Citas y bloques especiales */
-blockquote {
-    margin: 40px 60px;
-    padding: 30px;
-    font-style: italic;
-    position: relative;
-    background: #1a1209;
-    border-left: 3px solid #463521;
-    color: #a17f1a;
-}
-
-blockquote::before {
-    content: '✠';
-    position: absolute;
-    left: -20px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #463521;
-    font-size: 2em;
-}
-
-/* Símbolos y decoraciones */
-.simbolo-arcano {
-    font-size: 2em;
-    color: #8b0000;
-    text-align: center;
-    margin: 30px 0;
-}
-
-.separador {
-    text-align: center;
-    margin: 40px 0;
-    color: #463521;
-    font-size: 1.5em;
-}
-
-.separador::before,
-.separador::after {
-    content: '✧ ⟡ ✧';
-    margin: 0 20px;
-    color: #463521;
-}
-
-/* Enlaces rituales */
-a {
-    color: #a17f1a;
-    text-decoration: none;
-    border-bottom: 1px solid #463521;
-    padding: 2px 4px;
-    transition: all 0.3s ease;
-}
-
-a:hover {
-    color: hsl(0, 100%, 23%);
-    border-color: #8b0000;
-    text-shadow: 0 0 5px rgba(139,0,0,0.3);
-    background: rgba(139,0,0,0.1);
-}
-
-/* Listas de conjuros */
-ul {
-    list-style: none;
-    padding: 0 0 0 20px;
-}
-
-ul li {
-    margin: 15px 0;
-    padding-left: 30px;
-    position: relative;
-}
-
-ul li::before {
-    content: '⚝';
-    color: #463521;
-    position: absolute;
-    left: 0;
-    font-size: 1.2em;
-}
-
-/* Bordes decorativos en las esquinas */
-.grimorio::after {
-    content: '';
-    position: absolute;
-    inset: 15px;
-    border: 2px solid #463521;
-    pointer-events: none;
-}
-
-/* Efectos de pergamino viejo */
-.pagina {
-    position: relative;
-    margin: 20px 0;
-    padding: 20px;
-}
-
-.pagina::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-        linear-gradient(45deg, transparent 48%, #241810 49%, #241810 51%, transparent 52%),
-        linear-gradient(-45deg, transparent 48%, #241810 49%, #241810 51%, transparent 52%);
-    background-size: 30px 30px;
-    opacity: 0.1;
-    pointer-events: none;
-}
-
-/* Scrollbar del grimorio */
-::-webkit-scrollbar {
-    width: 12px;
-}
-
-::-webkit-scrollbar-track {
-    background: #1a1209;
-    border: 1px solid #463521;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #463521;
-    border: 2px solid #1a1209;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #8b0000;
-}
-
-/* Selección de texto */
-::selection {
-    background: rgba(139,0,0,0.3);
-    color: #c8aa6e;
-}
-
-/* Efectos de tinta antigua */
-.tinta-antigua {
-    color: #8b0000;
-    font-style: italic;
-}
-
-/* Notas al margen */
-.nota-marginal {
-    font-size: 0.9em;
-    color: #a17f1a;
-    font-style: italic;
-    margin: 20px -30px;
-    padding: 15px;
-    border-top: 1px solid #463521;
-    border-bottom: 1px solid #463521;
-}
-
-/* Círculos rituales */
-.circulo-ritual {
+/* Sellos mágicos */
+.sello-magico {
     width: 200px;
     height: 200px;
     margin: 40px auto;
     position: relative;
-    border: 2px solid #463521;
+    background-image: url('path/to/magical-seal.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.8;
+    transition: all 0.5s ease;
+}
+
+.sello-magico:hover {
+    opacity: 1;
+    transform: rotate(360deg);
+    filter: drop-shadow(0 0 10px var(--color-sangre));
+}
+
+/* Círculos rituales mejorados */
+.circulo-ritual {
+    width: 300px;
+    height: 300px;
+    margin: 60px auto;
+    position: relative;
+    border: 2px solid var(--color-oro);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-image: 
+        url('path/to/ritual-circle.svg'),
+        radial-gradient(circle at center,
+            transparent 40%,
+            rgba(161,127,26,0.1) 60%,
+            transparent 70%
+        );
 }
 
-.circulo-ritual::before {
-    content: '★';
-    color: #8b0000;
-    font-size: 3em;
+/* Runas giratorias */
+.runas-giratorias {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    animation: girarRunas 60s linear infinite;
 }
 
-/* Animaciones sutiles */
+@keyframes girarRunas {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Elementos decorativos adicionales */
+.decoracion-pagina {
+    position: absolute;
+    width: 50px;
+    height: 200px;
+    background-image: url('path/to/page-decoration.svg');
+    opacity: 0.3;
+}
+
+.decoracion-izquierda {
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.decoracion-derecha {
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%) scaleX(-1);
+}
+
+/* Tablas místicas */
+.tabla-mistica {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 40px 0;
+    font-family: "Almendra", serif;
+}
+
+.tabla-mistica th,
+.tabla-mistica td {
+    border: 1px solid var(--color-sombra);
+    padding: 15px;
+    text-align: center;
+}
+
+.tabla-mistica th {
+    background: rgba(139,0,0,0.1);
+    color: var(--color-oro);
+}
+
+/* Ilustraciones mágicas */
+.ilustracion-magica {
+    width: 100%;
+    max-width: 400px;
+    margin: 40px auto;
+    display: block;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.ilustracion-magica:hover {
+    opacity: 1;
+    filter: sepia(50%) hue-rotate(320deg);
+}
+
+/* Notas al margen mejoradas */
+.nota-marginal {
+    font-size: 0.9em;
+    color: var(--color-oro);
+    font-style: italic;
+    margin: 30px -50px;
+    padding: 20px;
+    border: 1px solid var(--color-sombra);
+    background: rgba(26,18,9,0.3);
+    position: relative;
+}
+
+.nota-marginal::before {
+    content: '※';
+    position: absolute;
+    left: -30px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-sangre);
+    font-size: 1.5em;
+}
+
+/* Efectos de tinta antigua mejorados */
+.tinta-antigua {
+    color: var(--color-sangre);
+    font-style: italic;
+    text-shadow: 0 0 1px rgba(139,0,0,0.3);
+}
+
+/* Símbolos arcanos animados */
+.simbolo-arcano {
+    font-size: 2.5em;
+    color: var(--color-sangre);
+    text-align: center;
+    margin: 40px 0;
+    animation: brilloArcano 3s infinite;
+}
+
 @keyframes brilloArcano {
     0% { text-shadow: 0 0 5px rgba(139,0,0,0.3); }
     50% { text-shadow: 0 0 15px rgba(139,0,0,0.5); }
     100% { text-shadow: 0 0 5px rgba(139,0,0,0.3); }
 }
 
-.texto-arcano {
-    animation: brilloArcano 3s infinite;
+/* Separadores ornamentados */
+.separador-ornamentado {
+    text-align: center;
+    margin: 50px 0;
+    height: 30px;
+    background-image: url('path/to/ornamental-divider.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    opacity: 0.6;
+}
+
+/* Efectos de hover en enlaces */
+a {
+    color: var(--color-oro);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-sombra);
+    padding: 2px 4px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+a:hover {
+    color: var(--color-sangre);
+    border-color: var(--color-sangre);
+    text-shadow: 0 0 5px rgba(139,0,0,0.3);
+}
+
+a:hover::before {
+    content: '✦';
+    position: absolute;
+    left: -20px;
+    color: var(--color-sangre);
+}
+
+/* Listas de conjuros mejoradas */
+.lista-conjuros {
+    list-style: none;
+    padding: 0;
+}
+
+.lista-conjuros li {
+    margin: 20px 0;
+    padding-left: 40px;
+    position: relative;
+}
+
+.lista-conjuros li::before {
+    content: '⚝';
+    position: absolute;
+    left: 0;
+    color: var(--color-oro);
+    font-size: 1.5em;
+    transform: rotate(0deg);
+    transition: transform 0.3s ease;
+}
+
+.lista-conjuros li:hover::before {
+    transform: rotate(180deg);
+    color: var(--color-sangre);
+}
+
+/* Marcos para imágenes */
+.marco-mistico {
+    border: 3px solid var(--color-sombra);
+    padding: 10px;
+    background: rgba(26,18,9,0.5);
+    box-shadow: 
+        0 0 0 1px var(--color-oro),
+        0 0 20px rgba(0,0,0,0.3);
+}
+
+/* Efectos de página doblada */
+.pagina-doblada {
+    position: relative;
+    overflow: hidden;
+}
+
+.pagina-doblada::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, 
+        transparent 50%,
+        rgba(70,53,33,0.2) 50%
+    );
+}
+
+/* Animación de aparición de elementos */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Efectos de resplandor en hover */
+.resplandor-hover:hover {
+    filter: drop-shadow(0 0 5px var(--color-oro));
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
+    width: 12px;
+    background: var(--color-tinta);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-sombra);
+    border: 2px solid var(--color-tinta);
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-sangre);
 }
