@@ -25,6 +25,10 @@ body {
     position: relative;
 }
 
+.centered-text {
+    text-align: center;
+  }
+
 /* Contenedor principal del grimorio */
 .grimorio {
     max-width: 900px;
