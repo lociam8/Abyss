@@ -1,105 +1,292 @@
+/* Estilos base del grimorio */
 body {
-    background-color: #1a1a1a;
-    color: #e0e0e0;
-    font-family: 'Times New Roman', serif;
-    line-height: 1.6;
+    background-color: #000;
+    background-image: 
+        url('data:image/svg+xml;charset=utf-8,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><path d="M50 50 L45 45 L55 45 Z" fill="%231a0000"/></svg>');
+    color: #c8aa6e;
+    font-family: "UnifrakturMaguntia", "Goudy Old Style", serif;
     margin: 0;
-    padding: 20px;
+    padding: 40px 20px;
+    line-height: 1.8;
+    min-height: 100vh;
+    position: relative;
 }
 
-h1, h2 {
-    color: #c0c0c0;
-    text-align: center;
-}
-
-nav ul {
-    list-style: none;
-    padding: 0;
-}
-
-nav ul li {
-    margin: 10px 0;
-}
-
-nav ul li a {
-    color: #8a8a8a;
-    text-decoration: none;
-    font-size: 1.2em;
-}
-
-nav ul li a:hover {
-    color: #ffffff;
-}
-
-.espectro {
-    border: 1px solid #333;
-    margin: 20px 0;
-    padding: 15px;
-    background-color: #222;
-}
-
-.simbolo {
-    font-size: 2em;
-    color: #666;
-}
-
-/* Añadir a los estilos existentes */
-
-blockquote {
-    border-left: 3px solid #444;
-    margin: 20px 0;
-    padding-left: 20px;
-    font-style: italic;
-}
-
-.advertencia {
-    color: #ff4444;
-    font-weight: bold;
-    text-align: center;
-    margin: 20px 0;
-}
-
-.espectros-container {
+.grimorio {
     max-width: 800px;
     margin: 0 auto;
+    background: #1a1209;
+    padding: 60px 40px;
+    border: 2px solid #463521;
+    box-shadow: 
+        0 0 0 10px #0a0705,
+        0 0 30px rgba(0,0,0,0.8);
+    position: relative;
+    background-image: 
+        url('data:image/svg+xml;charset=utf-8,<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="200" fill="%231a1209" fill-opacity="0.7"/><path d="M0 0 L200 200 M200 0 L0 200" stroke="%23241810" stroke-width="1"/></svg>');
 }
 
-.espectro {
-    margin-bottom: 30px;
-    padding: 20px;
-    background: linear-gradient(to bottom, #222222, #1a1a1a);
-    border: 1px solid #333;
-    border-radius: 5px;
+.grimorio::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('data:image/svg+xml;charset=utf-8,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="1" fill="%23463521"/></svg>');
+    opacity: 0.1;
+    pointer-events: none;
 }
 
-.espectro h2 {
-    color: #c0c0c0;
-    margin-top: 0;
-}
-
-.simbolo {
-    color: #666;
-    margin-right: 10px;
-}
-
-.nota {
-    font-style: italic;
-    color: #888;
-    margin: 20px 0;
-    padding: 10px;
-    border-top: 1px solid #333;
-    border-bottom: 1px solid #333;
-}
-
-a {
-    color: #666;
-    text-decoration: none;
-    display: block;
+/* Encabezados del grimorio */
+h1 {
+    color: #8b0000;
+    font-size: 3em;
     text-align: center;
-    margin-top: 30px;
-    padding: 10px;
+    margin: 40px 0;
+    font-family: "UnifrakturMaguntia", "Goudy Old Style", serif;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    letter-spacing: 3px;
+    position: relative;
+}
+
+h1::before, h1::after {
+    content: '☽';
+    display: inline-block;
+    color: #8b0000;
+    margin: 0 20px;
+    font-size: 0.8em;
+    transform: rotate(270deg);
+}
+
+h2 {
+    color: #a17f1a;
+    font-size: 2em;
+    margin: 40px 0 20px;
+    text-align: center;
+    position: relative;
+}
+
+h2::before, h2::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(to var(--direction, right), #463521, transparent);
+}
+
+h2::before {
+    right: 100%;
+    margin-right: 20px;
+    --direction: right;
+}
+
+h2::after {
+    left: 100%;
+    margin-left: 20px;
+    --direction: left;
+}
+
+/* Texto y párrafos */
+p {
+    color: #c8aa6e;
+    text-align: justify;
+    margin: 25px 0;
+    line-height: 1.8;
+    font-size: 1.1em;
+    text-indent: 2em;
+}
+
+/* Letras capitulares */
+p:first-of-type::first-letter {
+    font-size: 3.5em;
+    float: left;
+    padding: 0.1em 0.1em 0 0;
+    color: #8b0000;
+    font-family: "UnifrakturMaguntia", serif;
+    line-height: 0.8;
+    margin-right: 0.1em;
+}
+
+/* Citas y bloques especiales */
+blockquote {
+    margin: 40px 60px;
+    padding: 30px;
+    font-style: italic;
+    position: relative;
+    background: #1a1209;
+    border-left: 3px solid #463521;
+    color: #a17f1a;
+}
+
+blockquote::before {
+    content: '✠';
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #463521;
+    font-size: 2em;
+}
+
+/* Símbolos y decoraciones */
+.simbolo-arcano {
+    font-size: 2em;
+    color: #8b0000;
+    text-align: center;
+    margin: 30px 0;
+}
+
+.separador {
+    text-align: center;
+    margin: 40px 0;
+    color: #463521;
+    font-size: 1.5em;
+}
+
+.separador::before,
+.separador::after {
+    content: '✧ ⟡ ✧';
+    margin: 0 20px;
+    color: #463521;
+}
+
+/* Enlaces rituales */
+a {
+    color: #a17f1a;
+    text-decoration: none;
+    border-bottom: 1px solid #463521;
+    padding: 2px 4px;
+    transition: all 0.3s ease;
 }
 
 a:hover {
-    color: #fff;
+    color: hsl(0, 100%, 23%);
+    border-color: #8b0000;
+    text-shadow: 0 0 5px rgba(139,0,0,0.3);
+    background: rgba(139,0,0,0.1);
+}
+
+/* Listas de conjuros */
+ul {
+    list-style: none;
+    padding: 0 0 0 20px;
+}
+
+ul li {
+    margin: 15px 0;
+    padding-left: 30px;
+    position: relative;
+}
+
+ul li::before {
+    content: '⚝';
+    color: #463521;
+    position: absolute;
+    left: 0;
+    font-size: 1.2em;
+}
+
+/* Bordes decorativos en las esquinas */
+.grimorio::after {
+    content: '';
+    position: absolute;
+    inset: 15px;
+    border: 2px solid #463521;
+    pointer-events: none;
+}
+
+/* Efectos de pergamino viejo */
+.pagina {
+    position: relative;
+    margin: 20px 0;
+    padding: 20px;
+}
+
+.pagina::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        linear-gradient(45deg, transparent 48%, #241810 49%, #241810 51%, transparent 52%),
+        linear-gradient(-45deg, transparent 48%, #241810 49%, #241810 51%, transparent 52%);
+    background-size: 30px 30px;
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+/* Scrollbar del grimorio */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1a1209;
+    border: 1px solid #463521;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #463521;
+    border: 2px solid #1a1209;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #8b0000;
+}
+
+/* Selección de texto */
+::selection {
+    background: rgba(139,0,0,0.3);
+    color: #c8aa6e;
+}
+
+/* Efectos de tinta antigua */
+.tinta-antigua {
+    color: #8b0000;
+    font-style: italic;
+}
+
+/* Notas al margen */
+.nota-marginal {
+    font-size: 0.9em;
+    color: #a17f1a;
+    font-style: italic;
+    margin: 20px -30px;
+    padding: 15px;
+    border-top: 1px solid #463521;
+    border-bottom: 1px solid #463521;
+}
+
+/* Círculos rituales */
+.circulo-ritual {
+    width: 200px;
+    height: 200px;
+    margin: 40px auto;
+    position: relative;
+    border: 2px solid #463521;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circulo-ritual::before {
+    content: '★';
+    color: #8b0000;
+    font-size: 3em;
+}
+
+/* Animaciones sutiles */
+@keyframes brilloArcano {
+    0% { text-shadow: 0 0 5px rgba(139,0,0,0.3); }
+    50% { text-shadow: 0 0 15px rgba(139,0,0,0.5); }
+    100% { text-shadow: 0 0 5px rgba(139,0,0,0.3); }
+}
+
+.texto-arcano {
+    animation: brilloArcano 3s infinite;
 }
