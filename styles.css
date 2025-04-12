@@ -151,12 +151,15 @@ h1::after {
 }
 
 /* Runas giratorias */
-.runas-giratorias {
-    position: absolute;
-    width: 100%;
-    height: 100%;
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
     animation: girarRunas 60s linear infinite;
-}
+  }
 
 @keyframes girarRunas {
     from { transform: rotate(0deg); }
@@ -205,14 +208,14 @@ h1::after {
 }
 
 /* Ilustraciones mágicas */
-.ilustracion-magica {
-    width: 100%;
-    max-width: 400px;
-    margin: 40px auto;
+img {
+    max-width: 100%;
+    height: auto;
     display: block;
-    opacity: 0.8;
-    transition: all 0.3s ease;
-}
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+  }
 
 .ilustracion-magica:hover {
     opacity: 1;
