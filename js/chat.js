@@ -55,4 +55,44 @@ document.addEventListener('DOMContentLoaded', () => {
         option.textContent = `${rank.symbol} ${rank.name}`;
         rankSelect.appendChild(option);
     });
+
+    const messageInput = document.getElementById('messageInput');
+    const sendButton = document.getElementById('sendButton');
+    const chatMessages = document.getElementById('chatMessages');
+
+    function sendMessage() {
+        const message = messageInput.value.trim();
+        if (!message) return;
+
+        const messageElement = document.createElement('div');
+        messageElement.className = 'message';
+        messageElement.innerHTML = `
+            <div class="message-user">
+                <span class="username">Iniciado</span>
+            </div>
+            <div class="message-text">${message}</div>
+        `;
+
+        chatMessages.appendChild(messageElement);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        messageInput.value = '';
+    }
+
+    // Evento click para el botón de enviar
+    sendButton.addEventListener('click', sendMessage);
+
+    // Evento para enviar con Enter
+    messageInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            sendMessage();
+        }
+    });
+
+    // Mensaje inicial del sistema
+    const systemMessage = document.createElement('div');
+    systemMessage.className = 'message system';
+    systemMessage.innerHTML = `
+        <div class="message-text">El canal astral ha sido abierto...</div>
+    `;
+    chatMessages.appendChild(systemMessage);
 });
