@@ -651,3 +651,119 @@ a:hover::before {
 .nota-marginal {
     text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
 }
+
+/* Estilos para el Canal Astral */
+.canal-astral-page {
+    background: #000;
+    background-image: 
+        url('path/to/stars-texture.png'),
+        radial-gradient(circle at 50% 50%, #1a0000 0%, #000 100%);
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.chat-container.fullscreen {
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chat-container.fullscreen .chat-modal {
+    display: block;
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+    height: 90vh;
+    transform: none;
+    top: 0;
+    left: 0;
+    margin: auto;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.chat-modal.active {
+    display: block;
+}
+
+.message {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mejoras visuales para el chat */
+.chat-header {
+    background: linear-gradient(to right, #1a0000, #2a0000);
+    padding: 20px;
+}
+
+.chat-header h3 {
+    font-size: 1.5em;
+    letter-spacing: 2px;
+}
+
+.chat-rules {
+    background: linear-gradient(to bottom, #1a0000, #0a0000);
+}
+
+.chat-rules ul li {
+    transition: color 0.3s ease;
+}
+
+.chat-rules ul li:hover {
+    color: var(--color-sangre);
+}
+
+.chat-messages {
+    background: 
+        linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+        url('path/to/dark-texture.png');
+    padding: 30px;
+}
+
+.chat-input {
+    background: linear-gradient(to top, #1a0000, #0a0000);
+}
+
+.chat-input input {
+    background: rgba(0,0,0,0.7);
+    border: 1px solid var(--color-sangre);
+    padding: 15px;
+    font-family: "Almendra", serif;
+    transition: all 0.3s ease;
+}
+
+.chat-input input:focus {
+    border-color: var(--color-oro);
+    box-shadow: 0 0 10px rgba(255,138,0,0.3);
+    outline: none;
+}
+
+.chat-input button {
+    font-size: 1.2em;
+    padding: 15px 30px;
+    background: linear-gradient(to bottom, #79000d, #4a0008);
+    transition: all 0.3s ease;
+}
+
+.chat-input button:hover {
+    background: linear-gradient(to bottom, #ff0553, #79000d);
+    transform: translateY(-2px);
+}
