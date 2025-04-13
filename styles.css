@@ -838,14 +838,131 @@ a:hover::before {
     display: none;
     position: fixed;
     right: 20px;
-    top: 20px;
-    background: rgba(0, 0, 0, 0.9);
-    border: 1px solid var(--color-sangre);
-    padding: 15px;
-    border-radius: 5px;
+    top: 80px;
+    width: 300px;
+    background: rgba(10, 0, 0, 0.95);
+    border: 2px solid #79000d;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
     z-index: 1000;
+    backdrop-filter: blur(5px);
 }
 
 .admin-panel.visible {
     display: block;
+    animation: slideIn 0.3s ease-out;
+}
+
+.admin-panel h4 {
+    color: #ff0553;
+    margin: 0 0 15px 0;
+    font-family: "UnifrakturMaguntia", serif;
+    text-align: center;
+    border-bottom: 1px solid #79000d;
+    padding-bottom: 10px;
+}
+
+.admin-controls {
+    display: grid;
+    gap: 15px;
+}
+
+.admin-section {
+    background: rgba(26, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #79000d;
+}
+
+.admin-section h5 {
+    color: #ff8a00;
+    margin: 0 0 10px 0;
+    font-size: 0.9em;
+}
+
+.control-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.admin-button {
+    background: linear-gradient(180deg, #79000d 0%, #4a0008 100%);
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.admin-button:hover {
+    background: linear-gradient(180deg, #ff0553 0%, #79000d 100%);
+    transform: translateY(-1px);
+}
+
+.admin-button.danger {
+    background: linear-gradient(180deg, #ff0553 0%, #79000d 100%);
+}
+
+/* Mejoras en los mensajes */
+.message {
+    position: relative;
+    margin-bottom: 15px;
+    padding: 15px;
+    background: rgba(26, 0, 0, 0.7);
+    border-left: 3px solid #79000d;
+    border-radius: 0 8px 8px 0;
+    transition: all 0.3s ease;
+}
+
+.message:hover {
+    background: rgba(26, 0, 0, 0.9);
+    transform: translateX(5px);
+}
+
+.message.admin-message {
+    background: rgba(121, 0, 13, 0.3);
+    border-left-color: #ff0553;
+}
+
+.message-actions {
+    display: none;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    gap: 5px;
+}
+
+.admin .message:hover .message-actions {
+    display: flex;
+}
+
+.action-button {
+    background: none;
+    border: none;
+    color: #ff0553;
+    cursor: pointer;
+    padding: 5px;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.action-button:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* Animaciones */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }

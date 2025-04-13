@@ -14,15 +14,44 @@
                 <a href="index.html" class="close-btn">✧</a>
             </div>
             <div id="adminPanel" class="admin-panel">
-                <h4>Panel de Control Abismal</h4>
-                <div class="rank-controls">
-                    <select id="userSelect">
-                        <!-- Se llenará dinámicamente -->
-                    </select>
-                    <select id="rankSelect">
-                        <!-- Se llenará con los rangos disponibles -->
-                    </select>
-                    <button onclick="setUserRank()">Asignar Rango</button>
+                <h4>⟁ Panel de Control Abismal ⟁</h4>
+                <div class="admin-controls">
+                    <div class="admin-section">
+                        <h5>🔮 Gestión de Rangos</h5>
+                        <div class="control-group">
+                            <select id="userSelect" class="admin-select">
+                                <option value="">Seleccionar usuario...</option>
+                            </select>
+                            <select id="rankSelect" class="admin-select">
+                                <option value="">Asignar rango...</option>
+                            </select>
+                        </div>
+                        <button onclick="setUserRank()" class="admin-button">Asignar Rango</button>
+                    </div>
+
+                    <div class="admin-section">
+                        <h5>🕯️ Control del Canal</h5>
+                        <div class="control-group">
+                            <button onclick="toggleChatLock()" class="admin-button" id="lockButton">
+                                Bloquear Canal
+                            </button>
+                            <button onclick="clearChat()" class="admin-button danger">
+                                Purgar Canal
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="admin-section">
+                        <h5>⚠️ Moderación</h5>
+                        <div class="control-group">
+                            <button onclick="toggleSlowMode()" class="admin-button" id="slowModeButton">
+                                Modo Lento
+                            </button>
+                            <button onclick="showBannedUsers()" class="admin-button">
+                                Ver Silenciados
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -107,3 +136,4 @@
     </script>
 </body>
 </html>
+
