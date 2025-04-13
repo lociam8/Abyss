@@ -966,3 +966,46 @@ a:hover::before {
         transform: translateX(0);
     }
 }
+
+.admin-login-panel {
+    position: fixed;
+    bottom: 50px;
+    right: 20px;
+    background: rgba(10, 0, 0, 0.95);
+    padding: 15px;
+    border: 2px solid #79000d;
+    border-radius: 8px;
+    z-index: 1000;
+    display: flex;
+    gap: 10px;
+}
+
+.admin-login-panel input {
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid #79000d;
+    color: #fff;
+    padding: 8px;
+    font-family: "Almendra", serif;
+}
+
+.admin-login-panel button {
+    background: linear-gradient(180deg, #79000d 0%, #4a0008 100%);
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-family: "Almendra", serif;
+}
+
+.admin-login-panel button:hover {
+    background: linear-gradient(180deg, #ff0553 0%, #79000d 100%);
+}
+
+#hiddenSymbol {
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+#hiddenSymbol:hover {
+    opacity: 0.3;
+}

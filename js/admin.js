@@ -139,3 +139,36 @@ window.sendMessage = function() {
         originalSendMessage();
     }
 };
+
+// Sistema de login administrativo
+let clickCount = 0;
+const hiddenSymbol = document.getElementById('hiddenSymbol');
+const adminLoginPanel = document.getElementById('adminLoginPanel');
+
+hiddenSymbol.addEventListener('click', () => {
+    clickCount++;
+    if (clickCount === 3) {
+        adminLoginPanel.style.display = 'block';
+        hiddenSymbol.style.opacity = '0.5';
+        hiddenSymbol.style.color = '#ff0553';
+    }
+});
+
+function loginAsAdmin() {
+    const password = document.getElementById('adminPassword').value;
+    if (password === 'lociamabyssgod') { // Esta es la contraseña que deberás usar
+        localStorage.setItem('userToken', 'abismo_admin_key');
+        location.reload();
+    } else {
+        alert('Los espectros rechazan tu intento de acceso.');
+    }
+}
+
+// Verificar si ya es admin al cargar
+document.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('userToken') === 'abismo_admin_key') {
+        hiddenSymbol.style.opacity = '0.5';
+        hiddenSymbol.style.color = '#ff0553';
+        hiddenSymbol.textContent = '⟁';
+    }
+});
