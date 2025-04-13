@@ -5,102 +5,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grimorio Arcano</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
-<body>
-    <div style="text-align: center">
+<body class="dark-theme">
+    <!-- Partículas de fondo -->
+    <div id="particles-js"></div>
+
+    <!-- Niebla animada -->
+    <div class="fog-container">
+        <div class="fog-img fog-img-first"></div>
+        <div class="fog-img fog-img-second"></div>
+    </div>
+
     <div class="grimorio">
-        <!-- Bordes decorativos -->
-        <div class="borde-decorativo borde-tl"></div>
-        <div class="borde-decorativo borde-tr"></div>
-        <div class="borde-decorativo borde-bl"></div>
-        <div class="borde-decorativo borde-br"></div>
+        <!-- Runas flotantes decorativas -->
+        <div class="floating-runes">
+            <span class="rune">ᚨ</span>
+            <span class="rune">ᚷ</span>
+            <span class="rune">ᚹ</span>
+            <span class="rune">ᛟ</span>
+        </div>
 
-        <!-- Contenido del grimorio -->
-        <h1 class="fade-in">Grimorio del Abismo</h1>
-        <p>Zahl'Ruun — La Voz Que Devora</p>
+        <h1 class="magical-title">Grimorio del Abismo</h1>
+        <p class="mystical-subtitle">Zahl'Ruun — La Voz Que Devora</p>
         
-        <div class="sello-magico"></div>
-        
-        <div class="pagina-doblada">
-            <p class="tinta-antigua">el abismo nos espera y no observa</p>
-            
-            <div class="circulo-ritual">
-                <div class="runas-giratorias">
-                    <img src="runa.png">
+        <!-- Círculo ritual mejorado -->
+        <div class="ritual-circle">
+            <div class="inner-circle"></div>
+            <div class="rune-ring"></div>
+            <div class="energy-pulse"></div>
+        </div>
+
+        <!-- Sección de conjuros -->
+        <div class="spell-section">
+            <h2 class="section-title">Conjuros Ancestrales</h2>
+            <div class="spell-grid">
+                <div class="spell-card" data-spell="fuego">
+                    <div class="spell-icon"><i class="fas fa-fire"></i></div>
+                    <h3>Llamas del Vacío</h3>
+                    <p>Invoca el fuego primordial</p>
                 </div>
-            </div>
-            
-            <div class="nota-marginal">
-                Nota: Este grimorio contiene conocimiento ancestral...
+                <div class="spell-card" data-spell="hielo">
+                    <div class="spell-icon"><i class="fas fa-snowflake"></i></div>
+                    <h3>Escarcha Eterna</h3>
+                    <p>Congela el tiempo mismo</p>
+                </div>
+                <!-- Más spell-cards aquí -->
             </div>
         </div>
 
-        <div class="separador-ornamentado"></div>
+        <!-- Portal místico -->
+        <div class="mystic-portal">
+            <div class="portal-frame"></div>
+            <div class="portal-energy"></div>
+            <button class="portal-button">Abrir Portal</button>
+        </div>
 
-        <ul class="lista-conjuros">
-            <li>Sha-vel’tahr-zunn — "Yo veo el fuego del abismo"</li>
-            <li>Zahl’kaarn-oth’lim — "Fragmento del consumido por el abismo"</li>
-            <li>Thyr’venn-xhul — "La sombra es silencio"</li>
-            <li>Vel’zor-bhoz — "Revelar el vacío que devora"</li>
-            <h1>✦ LIBRO I: DEL JURAMENTO, EL VACÍO Y SUS HIJOS</h1>
-            <nav>
-                <ul>
-                    <li><a href="palabras-iniciales.html">⟁Palabras Iniciales del Vacío</a></li>
-                    <li><a href="juramento-lociam.html">⟁Juramento del Lociam</a></li>
-                    <li><a href="advertencia.html">⟁Advertencia a los Profanos</a></li>
-                    <li><a href="genesis.html">⟁Génesis del Abismo</a></li>
-                    <li><a href="nacimiento-culto.html">⟁Nacimiento del Culto</a></li>
-                    <li><a href="espectros.html">⟁Los Espectros del Abismo</a></li>
-                    <li><a href="rituales-secretos.html">⟁Rituales Secretos del Abismo</a></li>
-        </ul>
+        <!-- Sección de notas -->
+        <div class="scrolls-section">
+            <div class="ancient-scroll">
+                <h3>Notas del Observador</h3>
+                <p class="magical-text">Los secretos del abismo son infinitos...</p>
+            </div>
+        </div>
 
-        <div class="simbolo-arcano">☥</div>
-
-        <img src="grimorio del abismo.png" alt="Ilustración Mágica" class="ilustracion-magica marco-mistico">
-
+        <!-- Chat mejorado -->
         <div class="chat-container">
-            <div id="overlay" class="overlay"></div>
-            <div id="chatModal" class="chat-modal">
-                <div class="chat-header">
-                    <h3>🕯️ Comunicación con el Abismo 🕯️</h3>
-                    <span class="close-btn" onclick="closeChat()">✧</span>
-                </div>
-                <div class="chat-rules">
-                    <p>⟁ Reglas del Canal Astral ⟁</p>
-                    <ul>
-                        <li>🌑 Habla solo en susurros del vacío</li>
-                        <li>👁️ No reveles tu verdadero nombre</li>
-                        <li>🔮 Usa los símbolos sagrados apropiados</li>
-                        <li>⚠️ No invoques espectros sin autorización</li>
-                        <li>🕯️ Mantén el respeto a los Lociam</li>
-                    </ul>
-                </div>
-                <div id="chatMessages" class="chat-messages">
-                    <div class="message system">
-                        <div class="message-text">El canal astral ha sido abierto...</div>
-                    </div>
-                    <div class="message">
-                        <div class="message-user">Lociam Veyirh</div>
-                        <div class="message-text">🕯️ Bienvenidos, iniciados. Que el Abismo guíe vuestros pensamientos.</div>
-                    </div>
-                </div>
-                <div class="chat-input">
-                    <input type="text" id="messageInput" placeholder="Susurra al vacío...">
-                    <button onclick="sendMessage()">⟁</button>
+            <div class="chat-header">
+                <h3><i class="fas fa-skull"></i> Canal Astral</h3>
+                <div class="chat-controls">
+                    <button class="control-btn" id="toggleTheme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="control-btn" id="toggleSound">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
                 </div>
             </div>
-            <a href="canal-astral.html" class="open-chat-btn">⟁ Canal Astral ⟁</a>
+            <div id="chatMessages" class="chat-messages"></div>
+            <div class="chat-input">
+                <input type="text" id="messageInput" placeholder="Susurra al vacío...">
+                <button id="sendButton">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
         </div>
-
-    </div>
-    <div id="adminLoginPanel" style="display: none;" class="admin-login-panel">
-        <input type="password" id="adminPassword" placeholder="Contraseña del Abismo">
-        <button onclick="loginAsAdmin()">Invocar Poder</button>
     </div>
 
-    <div id="hiddenSymbol" style="position: fixed; bottom: 10px; right: 10px; cursor: default; opacity: 0.1; font-size: 20px;">⟁</div>
-
-    <script src="js/ranks.js"></script>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="js/effects.js"></script>
     <script src="js/admin.js"></script>
     <script src="js/chat.js"></script>
 </body>
