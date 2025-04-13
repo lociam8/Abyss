@@ -5,9 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grimorio Arcano</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Particles.js para efectos visuales -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 </head>
 <body>
-    <div style="text-align: center">
+    <!-- Contenedor de partículas para el fondo -->
+    <div id="particles-js"></div>
+
+    <!-- Contenedor de niebla para efectos atmosféricos -->
+    <div class="fog-container">
+        <div class="fog-img fog-img-first"></div>
+        <div class="fog-img fog-img-second"></div>
+    </div>
+
+    <div class="theme-switcher">
+        <button id="themeToggle" title="Cambiar tema"><i class="fas fa-moon"></i></button>
+    </div>
+
+    <div class="main-container">
     <div class="grimorio">
         <!-- Bordes decorativos -->
         <div class="borde-decorativo borde-tl"></div>
@@ -18,18 +35,18 @@
         <!-- Contenido del grimorio -->
         <h1 class="fade-in">Grimorio del Abismo</h1>
         <p>Zahl'Ruun — La Voz Que Devora</p>
-        
+
         <div class="sello-magico"></div>
-        
+
         <div class="pagina-doblada">
             <p class="tinta-antigua">el abismo nos espera y no observa</p>
-            
+
             <div class="circulo-ritual">
                 <div class="runas-giratorias">
                     <img src="runa.png">
                 </div>
             </div>
-            
+
             <div class="nota-marginal">
                 Nota: Este grimorio contiene conocimiento ancestral...
             </div>
@@ -42,19 +59,49 @@
             <li>Zahl’kaarn-oth’lim — "Fragmento del consumido por el abismo"</li>
             <li>Thyr’venn-xhul — "La sombra es silencio"</li>
             <li>Vel’zor-bhoz — "Revelar el vacío que devora"</li>
-            <h1>✦ LIBRO I: DEL JURAMENTO, EL VACÍO Y SUS HIJOS</h1>
-            <nav>
-                <ul>
-                    <li><a href="palabras-iniciales.html">⟁Palabras Iniciales del Vacío</a></li>
-                    <li><a href="juramento-lociam.html">⟁Juramento del Lociam</a></li>
-                    <li><a href="advertencia.html">⟁Advertencia a los Profanos</a></li>
-                    <li><a href="genesis.html">⟁Génesis del Abismo</a></li>
-                    <li><a href="nacimiento-culto.html">⟁Nacimiento del Culto</a></li>
-                    <li><a href="espectros.html">⟁Los Espectros del Abismo</a></li>
-                    <li><a href="rituales-secretos.html">⟁Rituales Secretos del Abismo</a></li>
         </ul>
 
+        <h1>✦ LIBRO I: DEL JURAMENTO, EL VACÍO Y SUS HIJOS</h1>
+        <nav>
+            <ul class="navegacion-grimorio">
+                <li><a href="palabras-iniciales.html" class="nav-link"><i class="fas fa-book-dead"></i> Palabras Iniciales del Vacío</a></li>
+                <li><a href="juramento-lociam.html" class="nav-link"><i class="fas fa-hand-sparkles"></i> Juramento del Lociam</a></li>
+                <li><a href="advertencia.html" class="nav-link"><i class="fas fa-exclamation-triangle"></i> Advertencia a los Profanos</a></li>
+                <li><a href="genesis.html" class="nav-link"><i class="fas fa-meteor"></i> Génesis del Abismo</a></li>
+                <li><a href="nacimiento-culto.html" class="nav-link"><i class="fas fa-users"></i> Nacimiento del Culto</a></li>
+                <li><a href="espectros.html" class="nav-link"><i class="fas fa-ghost"></i> Los Espectros del Abismo</a></li>
+                <li><a href="rituales-secretos.html" class="nav-link"><i class="fas fa-magic"></i> Rituales Secretos del Abismo</a></li>
+            </ul>
+        </nav>
+
         <div class="simbolo-arcano">☥</div>
+
+        <div class="ritual-circle">
+            <div class="inner-circle"></div>
+            <div class="rune-ring"></div>
+            <div class="energy-pulse"></div>
+            <div class="ritual-center">
+                <i class="fas fa-eye ritual-eye"></i>
+            </div>
+        </div>
+
+        <div class="spell-grid">
+            <div class="spell-card" onclick="castSpell('fire')">
+                <div class="spell-icon"><i class="fas fa-fire"></i></div>
+                <h3>Llama Abismal</h3>
+                <p>Invoca el fuego del vacío</p>
+            </div>
+            <div class="spell-card" onclick="castSpell('shadow')">
+                <div class="spell-icon"><i class="fas fa-moon"></i></div>
+                <h3>Sombra Eterna</h3>
+                <p>Convoca la oscuridad primordial</p>
+            </div>
+            <div class="spell-card" onclick="castSpell('void')">
+                <div class="spell-icon"><i class="fas fa-skull"></i></div>
+                <h3>Vacío Devorador</h3>
+                <p>Abre un portal al abismo</p>
+            </div>
+        </div>
 
         <img src="grimorio del abismo.png" alt="Ilustración Mágica" class="ilustracion-magica marco-mistico">
 
@@ -62,17 +109,17 @@
             <div id="overlay" class="overlay"></div>
             <div id="chatModal" class="chat-modal">
                 <div class="chat-header">
-                    <h3>🕯️ Comunicación con el Abismo 🕯️</h3>
-                    <span class="close-btn" onclick="closeChat()">✧</span>
+                    <h3><i class="fas fa-candle-holder"></i> Comunicación con el Abismo <i class="fas fa-candle-holder"></i></h3>
+                    <span class="close-btn" onclick="closeChat()"><i class="fas fa-times-circle"></i></span>
                 </div>
                 <div class="chat-rules">
                     <p>⟁ Reglas del Canal Astral ⟁</p>
                     <ul>
-                        <li>🌑 Habla solo en susurros del vacío</li>
-                        <li>👁️ No reveles tu verdadero nombre</li>
-                        <li>🔮 Usa los símbolos sagrados apropiados</li>
-                        <li>⚠️ No invoques espectros sin autorización</li>
-                        <li>🕯️ Mantén el respeto a los Lociam</li>
+                        <li><i class="fas fa-moon"></i> Habla solo en susurros del vacío</li>
+                        <li><i class="fas fa-eye"></i> No reveles tu verdadero nombre</li>
+                        <li><i class="fas fa-hat-wizard"></i> Usa los símbolos sagrados apropiados</li>
+                        <li><i class="fas fa-exclamation-triangle"></i> No invoques espectros sin autorización</li>
+                        <li><i class="fas fa-candle-holder"></i> Mantén el respeto a los Lociam</li>
                     </ul>
                 </div>
                 <div id="chatMessages" class="chat-messages">
@@ -80,28 +127,110 @@
                         <div class="message-text">El canal astral ha sido abierto...</div>
                     </div>
                     <div class="message">
-                        <div class="message-user">Lociam Veyirh</div>
-                        <div class="message-text">🕯️ Bienvenidos, iniciados. Que el Abismo guíe vuestros pensamientos.</div>
+                        <div class="message-user">
+                            <span class="user-rank rank-7">
+                                <span class="rank-symbol">⟁</span>
+                                <span class="rank-name">Lociam del Abismo</span>
+                            </span>
+                            <span class="username">Veyirh</span>
+                        </div>
+                        <div class="message-text"><i class="fas fa-candle-holder"></i> Bienvenidos, iniciados. Que el Abismo guíe vuestros pensamientos.</div>
                     </div>
                 </div>
                 <div class="chat-input">
                     <input type="text" id="messageInput" placeholder="Susurra al vacío...">
-                    <button onclick="sendMessage()">⟁</button>
+                    <button id="sendButton" onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+                    <button id="emojiButton" class="emoji-button"><i class="fas fa-skull"></i></button>
+                </div>
+                <div id="emojiPicker" class="emoji-picker">
+                    <div class="emoji-grid">
+                        <span onclick="addEmoji('🕯️')">🕯️</span>
+                        <span onclick="addEmoji('👁️')">👁️</span>
+                        <span onclick="addEmoji('🌑')">🌑</span>
+                        <span onclick="addEmoji('⟁')">⟁</span>
+                        <span onclick="addEmoji('✧')">✧</span>
+                        <span onclick="addEmoji('☥')">☥</span>
+                        <span onclick="addEmoji('🔮')">🔮</span>
+                        <span onclick="addEmoji('⚰️')">⚰️</span>
+                    </div>
                 </div>
             </div>
-            <a href="canal-astral.html" class="open-chat-btn">⟁ Canal Astral ⟁</a>
+            <a href="canal-astral.html" class="open-chat-btn"><i class="fas fa-comment-alt"></i> Canal Astral <i class="fas fa-comment-alt"></i></a>
+        </div>
+
+        <!-- Panel de usuario -->
+        <div class="user-profile">
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="profile-info">
+                    <h3 id="userName">Iniciado</h3>
+                    <div id="userRank" class="user-rank rank-1">
+                        <span class="rank-symbol">●</span>
+                        <span class="rank-name">Iniciado del Eco (Ayr'Lun)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-stats">
+                <div class="stat">
+                    <span class="stat-value" id="userMessages">0</span>
+                    <span class="stat-label">Mensajes</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value" id="userRitual">0</span>
+                    <span class="stat-label">Rituales</span>
+                </div>
+            </div>
+            <button id="logoutButton" class="profile-button"><i class="fas fa-sign-out-alt"></i> Abandonar</button>
         </div>
 
     </div>
+    </div>
+
+    <!-- Panel de administración -->
+    <div id="adminPanel" class="admin-panel">
+        <h4><i class="fas fa-crown"></i> Panel de Control Lociam</h4>
+        <div class="admin-controls">
+            <div class="admin-section">
+                <h5>Control del Canal</h5>
+                <div class="control-group">
+                    <button id="lockButton" class="admin-button" onclick="adminManager.toggleChatLock()">Bloquear Canal</button>
+                    <button id="slowModeButton" class="admin-button" onclick="adminManager.toggleSlowMode()">Modo Lento</button>
+                </div>
+                <button id="clearButton" class="admin-button danger" onclick="adminManager.clearChat()">Purgar Canal</button>
+            </div>
+            <div class="admin-section">
+                <h5>Gestión de Rangos</h5>
+                <select id="userSelect" class="admin-select">
+                    <option value="">Seleccionar usuario...</option>
+                </select>
+                <select id="rankSelect" class="admin-select">
+                    <option value="">Seleccionar rango...</option>
+                </select>
+                <button onclick="setUserRank()" class="admin-button">Asignar Rango</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Panel de login administrativo -->
     <div id="adminLoginPanel" style="display: none;" class="admin-login-panel">
         <input type="password" id="adminPassword" placeholder="Contraseña del Abismo">
-        <button onclick="loginAsAdmin()">Invocar Poder</button>
+        <button onclick="loginAsAdmin()"><i class="fas fa-key"></i> Invocar Poder</button>
     </div>
 
     <div id="hiddenSymbol" style="position: fixed; bottom: 10px; right: 10px; cursor: default; opacity: 0.1; font-size: 20px;">⟁</div>
 
+    <!-- Notificaciones -->
+    <div id="notificationContainer" class="notification-container"></div>
+
+    <!-- Efectos visuales para hechizos -->
+    <div id="spellEffect" class="spell-effect"></div>
+
     <script src="js/ranks.js"></script>
     <script src="js/admin.js"></script>
     <script src="js/chat.js"></script>
+    <script src="js/effects.js"></script>
+    <script src="js/theme.js"></script>
 </body>
 </html>
