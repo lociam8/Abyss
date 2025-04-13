@@ -127,12 +127,57 @@ class AdminManager {
     }
 }
 
+// Sistema de login administrativo
+document.addEventListener('DOMContentLoaded', () => {
+    const hiddenSymbol = document.getElementById('hiddenSymbol');
+    const adminLoginPanel = document.getElementById('adminLoginPanel');
+    
+    if (!hiddenSymbol || !adminLoginPanel) {
+        console.error('Elementos de administración no encontrados');
+        return;
+    }
+
+    let clickCount = 0;
+
+    hiddenSymbol.addEventListener('click', () => {
+        clickCount++;
+        if (clickCount === 3) {
+            adminLoginPanel.style.display = 'block';
+            hiddenSymbol.style.opacity = '0.5';
+            hiddenSymbol.style.color = '#ff0553';
+        }
+    });
+
+    // Verificar si ya es admin
+    if (localStorage.getItem('userToken') === 'abismo_admin_key') {
+        hiddenSymbol.style.opacity = '0.5';
+        hiddenSymbol.style.color = '#ff0553';
+        hiddenSymbol.textContent = '⟁';
+    }
+});
+
+// Función global para el login
+window.loginAsAdmin = function() {
+    const adminPassword = document.getElementById('adminPassword');
+    if (!adminPassword) {
+        console.error('Campo de contraseña no encontrado');
+        return;
+    }
+
+    if (adminPassword.value === 'lociamabyssgod') {
+        localStorage.setItem('userToken', 'abismo_admin_key');
+        location.reload();
+    } else {
+        alert('Los espectros rechazan tu intento de acceso.');
+    }
+};
+
 // Inicializar el administrador
 const adminManager = new AdminManager();
 document.addEventListener('DOMContentLoaded', () => adminManager.initialize());
 
 // Modificar la función sendMessage existente
-const originalSendMessage = window.sendMessage;
+const originalSendMessage = window.sendMessage || function() {};
 window.sendMessage = function() {
     const username = 'Usuario'; // Reemplazar con el nombre real del usuario
     if (adminManager.canUserSendMessage(username)) {
@@ -140,35 +185,3 @@ window.sendMessage = function() {
     }
 };
 
-// Sistema de login administrativo
-let clickCount = 0;
-const hiddenSymbol = document.getElementById('hiddenSymbol');
-const adminLoginPanel = document.getElementById('adminLoginPanel');
-
-hiddenSymbol.addEventListener('click', () => {
-    clickCount++;
-    if (clickCount === 3) {
-        adminLoginPanel.style.display = 'block';
-        hiddenSymbol.style.opacity = '0.5';
-        hiddenSymbol.style.color = '#ff0553';
-    }
-});
-
-function loginAsAdmin() {
-    const password = document.getElementById('adminPassword').value;
-    if (password === 'lociamabyssgod') { // Esta es la contraseña que deberás usar
-        localStorage.setItem('userToken', 'abismo_admin_key');
-        location.reload();
-    } else {
-        alert('Los espectros rechazan tu intento de acceso.');
-    }
-}
-
-// Verificar si ya es admin al cargar
-document.addEventListener('DOMContentLoaded', () => {
-    if (localStorage.getItem('userToken') === 'abismo_admin_key') {
-        hiddenSymbol.style.opacity = '0.5';
-        hiddenSymbol.style.color = '#ff0553';
-        hiddenSymbol.textContent = '⟁';
-    }
-});
