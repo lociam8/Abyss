@@ -800,3 +800,52 @@ a:hover::before {
     background: linear-gradient(to bottom, #ff0553, #79000d);
     transform: translateY(-2px);
 }
+
+/* Estilos para los rangos */
+.user-rank {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.9em;
+    margin-right: 10px;
+}
+
+.rank-symbol {
+    font-size: 1.2em;
+}
+
+.message-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+/* Estilos específicos para cada rango */
+.rank-1 { color: #626262; }
+.rank-2 { color: #824d99; }
+.rank-3 { color: #9b2d30; }
+.rank-4 { color: #ab3c3c; }
+.rank-5 { color: #c41e3a; }
+.rank-6 { color: #ff0553; }
+.rank-7 { 
+    color: #ff0000;
+    text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
+/* Panel de administración de rangos */
+.admin-panel {
+    display: none;
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid var(--color-sangre);
+    padding: 15px;
+    border-radius: 5px;
+    z-index: 1000;
+}
+
+.admin-panel.visible {
+    display: block;
+}

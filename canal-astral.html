@@ -13,6 +13,18 @@
                 <h3>🕯️ Canal Astral del Abismo 🕯️</h3>
                 <a href="index.html" class="close-btn">✧</a>
             </div>
+            <div id="adminPanel" class="admin-panel">
+                <h4>Panel de Control Abismal</h4>
+                <div class="rank-controls">
+                    <select id="userSelect">
+                        <!-- Se llenará dinámicamente -->
+                    </select>
+                    <select id="rankSelect">
+                        <!-- Se llenará con los rangos disponibles -->
+                    </select>
+                    <button onclick="setUserRank()">Asignar Rango</button>
+                </div>
+            </div>
             
             <div class="chat-rules">
                 <p>⟁ Reglas del Canal Astral ⟁</p>
@@ -30,7 +42,13 @@
                     <div class="message-text">El canal astral ha sido abierto...</div>
                 </div>
                 <div class="message">
-                    <div class="message-user">Lociam Veyirh</div>
+                    <div class="message-user">
+                        <span class="user-rank">
+                            <span class="rank-symbol">⟁</span>
+                            <span class="rank-name">Lociam del Abismo</span>
+                        </span>
+                        <span class="username">Lociam Veyirh</span>
+                    </div>
                     <div class="message-text">🕯️ Bienvenidos, iniciados. Que el Abismo guíe vuestros pensamientos.</div>
                 </div>
             </div>
