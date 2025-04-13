@@ -1,5 +1,3 @@
-const rankManager = new RankManager();
-
 // Sistema de mensajes del chat
 class ChatSystem {
     constructor() {
@@ -139,38 +137,64 @@ class ChatSystem {
     displayMessage(message) {
         if (!this.chatMessages) return;
 
-        // Obtener información de rango
-        const rankIndex = message.userRank - 1;
-        const rankKey = Object.keys(RANKS)[rankIndex >= 0 ? rankIndex : 0];
-        const rank = RANKS[rankKey] || RANKS.INICIADO;
+        try {
+            // Obtener información de rango
+            let rank;
+            if (typeof RANKS !== 'undefined' && RANKS_ARRAY) {
+                // Usar el rango del mensaje o el rango por defecto
+                const rankId = message.userRank || 1;
+                rank = RANKS_ARRAY.find(r => r.id === rankId) || RANKS.INICIADO;
+            } else {
+                // Fallback si no se encuentra RANKS
+                rank = {
+                    id: 1,
+                    name: "Iniciado",
+                    symbol: "●"
+                };
+            }
 
-        // Crear elemento de mensaje
-        const messageElement = document.createElement('div');
-        messageElement.className = 'message';
-        messageElement.dataset.messageId = message.id;
-        messageElement.dataset.userId = message.userId;
+            // Crear elemento de mensaje
+            const messageElement = document.createElement('div');
+            messageElement.className = 'message';
+            messageElement.dataset.messageId = message.id;
+            messageElement.dataset.userId = message.userId;
 
-        // Contenido HTML
-        messageElement.innerHTML = `
-            <div class="message-user">
-                <span class="user-rank rank-${rank.id}">
-                    <span class="rank-symbol">${rank.symbol}</span>
-                    <span class="rank-name">${rank.name}</span>
-                </span>
-                <span class="username">${message.userName}</span>
-            </div>
-            <div class="message-text">${this.formatMessageText(message.text)}</div>
-        `;
+            // Contenido HTML
+            messageElement.innerHTML = `
+                <div class="message-user">
+                    <span class="user-rank rank-${rank.id}">
+                        <span class="rank-symbol">${rank.symbol}</span>
+                        <span class="rank-name">${rank.name}</span>
+                    </span>
+                    <span class="username">${message.userName}</span>
+                </div>
+                <div class="message-text">${this.formatMessageText(message.text)}</div>
+            `;
 
-        // Añadir al contenedor
-        this.chatMessages.appendChild(messageElement);
+            // Añadir al contenedor
+            this.chatMessages.appendChild(messageElement);
 
-        // Scroll al final
-        this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
+            // Scroll al final
+            this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
 
-        // Si es admin, añadir controles
-        if (userManager.isAdmin()) {
-            adminManager.addMessageControls(messageElement);
+            // Si es admin, añadir controles
+            if (typeof userManager !== 'undefined' && userManager.isAdmin && userManager.isAdmin()) {
+                if (typeof adminManager !== 'undefined' && adminManager.addMessageControls) {
+                    adminManager.addMessageControls(messageElement);
+                }
+            }
+        } catch (e) {
+            console.error('Error al mostrar mensaje:', e);
+            // Fallback simple
+            const messageElement = document.createElement('div');
+            messageElement.className = 'message';
+            messageElement.innerHTML = `
+                <div class="message-user">
+                    <span class="username">${message.userName || 'Usuario'}</span>
+                </div>
+                <div class="message-text">${message.text || ''}</div>
+            `;
+            this.chatMessages.appendChild(messageElement);
         }
     }
 
@@ -266,42 +290,56 @@ class ChatSystem {
 
 // Función para mostrar/ocultar el panel de admin
 function toggleAdminPanel() {
-    if (userManager.isAdmin()) {
-        document.getElementById('adminPanel').classList.toggle('visible');
+    const adminPanel = document.getElementById('adminPanel');
+    if (adminPanel && typeof userManager !== 'undefined' && userManager.isAdmin && userManager.isAdmin()) {
+        adminPanel.classList.toggle('visible');
     }
 }
 
 // Función para asignar rango
 function setUserRank() {
-    const userId = document.getElementById('userSelect').value;
-    const rankId = document.getElementById('rankSelect').value;
-    const adminToken = localStorage.getItem('userToken');
-
-    if (!userId || !rankId) {
-        if (typeof showNotification === 'function') {
-            showNotification('Selecciona un usuario y un rango', 'warning');
-        }
-        return;
-    }
-
     try {
-        const newRank = rankManager.setUserRank(adminToken, userId, parseInt(rankId));
-        updateUserRankDisplay(userId, newRank);
+        const userId = document.getElementById('userSelect').value;
+        const rankId = document.getElementById('rankSelect').value;
+        const adminToken = localStorage.getItem('userToken');
 
-        // Actualizar en la lista de usuarios en línea
-        const onlineUsers = userManager.getOnlineUsers();
-        const user = onlineUsers.find(u => u.id === userId);
-        if (user) {
-            user.rank = newRank.id;
-            chatSystem.addSystemMessage(`${user.name} ha sido ascendido a ${newRank.name}`);
-
-            // Reproducir sonido
-            if (typeof playSound === 'function') {
-                playSound('notification');
+        if (!userId || !rankId) {
+            console.log('Falta usuario o rango');
+            if (typeof showNotification === 'function') {
+                showNotification('Selecciona un usuario y un rango', 'warning');
             }
+            return;
+        }
+
+        console.log('Asignando rango:', rankId, 'a usuario:', userId);
+
+        if (typeof rankManager !== 'undefined' && rankManager.setUserRank) {
+            const newRank = rankManager.setUserRank(adminToken, userId, parseInt(rankId));
+            if (newRank) {
+                updateUserRankDisplay(userId, newRank);
+
+                // Actualizar en la lista de usuarios en línea
+                if (typeof userManager !== 'undefined' && userManager.getOnlineUsers) {
+                    const onlineUsers = userManager.getOnlineUsers();
+                    const user = onlineUsers.find(u => u.id === userId);
+                    if (user) {
+                        user.rank = newRank.id;
+                        chatSystem.addSystemMessage(`${user.name} ha sido ascendido a ${newRank.name}`);
+
+                        // Reproducir sonido
+                        if (typeof playSound === 'function') {
+                            playSound('notification');
+                        }
+                    }
+                }
+            } else {
+                console.error('Error al asignar rango: rango no válido o sin permisos');
+            }
+        } else {
+            console.error('rankManager no disponible');
         }
     } catch (error) {
-        console.error(error);
+        console.error('Error al asignar rango:', error);
         if (typeof showNotification === 'function') {
             showNotification('Error al asignar rango', 'error');
         }
@@ -310,27 +348,43 @@ function setUserRank() {
 
 // Actualizar visualización del rango de un usuario
 function updateUserRankDisplay(userId, newRank) {
-    // Actualizar en mensajes
-    document.querySelectorAll(`.message[data-user-id="${userId}"] .user-rank`).forEach(rankElement => {
-        rankElement.className = `user-rank rank-${newRank.id}`;
-        rankElement.innerHTML = `
-            <span class="rank-symbol">${newRank.symbol}</span>
-            <span class="rank-name">${newRank.name}</span>
-        `;
-    });
+    if (!newRank) {
+        console.error('Rango no válido');
+        return;
+    }
 
-    // Actualizar en lista de usuarios en línea
-    document.querySelectorAll(`#onlineUsersList .online-user[data-user-id="${userId}"] .user-rank`).forEach(rankElement => {
-        rankElement.className = `user-rank rank-${newRank.id}`;
-        rankElement.querySelector('.rank-symbol').textContent = newRank.symbol;
-    });
+    try {
+        // Actualizar en mensajes
+        document.querySelectorAll(`.message[data-user-id="${userId}"] .user-rank`).forEach(rankElement => {
+            rankElement.className = `user-rank rank-${newRank.id}`;
+            rankElement.innerHTML = `
+                <span class="rank-symbol">${newRank.symbol}</span>
+                <span class="rank-name">${newRank.name}</span>
+            `;
+        });
 
-    // Si es el usuario actual, actualizar su perfil
-    const currentUser = userManager.getCurrentUser();
-    if (currentUser && currentUser.id === userId) {
-        currentUser.rank = newRank.id;
-        localStorage.setItem('currentUser', JSON.stringify(currentUser));
-        userManager.updateUserInterface();
+        // Actualizar en lista de usuarios en línea
+        document.querySelectorAll(`#onlineUsersList .online-user[data-user-id="${userId}"] .user-rank`).forEach(rankElement => {
+            rankElement.className = `user-rank rank-${newRank.id}`;
+            const symbolElement = rankElement.querySelector('.rank-symbol');
+            if (symbolElement) {
+                symbolElement.textContent = newRank.symbol;
+            }
+        });
+
+        // Si es el usuario actual, actualizar su perfil
+        if (typeof userManager !== 'undefined' && userManager.getCurrentUser) {
+            const currentUser = userManager.getCurrentUser();
+            if (currentUser && currentUser.id === userId) {
+                currentUser.rank = newRank.id;
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                if (userManager.updateUserInterface) {
+                    userManager.updateUserInterface();
+                }
+            }
+        }
+    } catch (e) {
+        console.error('Error al actualizar visualización de rango:', e);
     }
 }
 
@@ -339,26 +393,56 @@ const chatSystem = new ChatSystem();
 
 // Inicialización
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('Inicializando sistema de chat...');
+
     // Inicializar sistema de chat
     chatSystem.initialize();
 
     // Llenar el selector de rangos
     const rankSelect = document.getElementById('rankSelect');
     if (rankSelect) {
-        // Limpiar opciones existentes excepto la primera
-        while (rankSelect.options.length > 1) {
-            rankSelect.remove(1);
-        }
+        try {
+            // Limpiar opciones existentes excepto la primera
+            while (rankSelect.options.length > 1) {
+                rankSelect.remove(1);
+            }
 
-        // Añadir rangos
-        Object.values(RANKS).forEach(rank => {
-            const option = document.createElement('option');
-            option.value = rank.id;
-            option.textContent = `${rank.symbol} ${rank.name}`;
-            rankSelect.appendChild(option);
+            // Añadir rangos si están disponibles
+            if (typeof RANKS !== 'undefined') {
+                Object.values(RANKS).forEach(rank => {
+                    const option = document.createElement('option');
+                    option.value = rank.id;
+                    option.textContent = `${rank.symbol} ${rank.name}`;
+                    rankSelect.appendChild(option);
+                });
+            }
+        } catch (e) {
+            console.error('Error al configurar selector de rangos:', e);
+        }
+    }
+
+    // Configurar eventos para abrir/cerrar chat
+    setupChatEvents();
+});
+
+// Configurar eventos del chat
+function setupChatEvents() {
+    const openChatBtn = document.querySelector('.open-chat-btn');
+    const closeBtn = document.querySelector('.close-btn');
+
+    if (openChatBtn) {
+        openChatBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.openChat();
         });
     }
-});
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            window.closeChat();
+        });
+    }
+}
 
 // Exponer funciones globalmente
 window.sendMessage = function() {
