@@ -684,16 +684,49 @@ a:hover::before {
     left: 0;
     margin: auto;
     animation: fadeIn 0.5s ease-out;
+    display: flex;
+    flex-direction: column;
 }
 
-.chat-modal.active {
-    display: block;
+.chat-header {
+    flex: 0 0 auto;
 }
 
+.chat-rules {
+    flex: 0 0 auto;
+}
+
+.chat-messages {
+    flex: 1 1 auto;
+    height: 0; /* Esto permite que el elemento se expanda correctamente */
+    min-height: 200px;
+    overflow-y: auto;
+    padding: 20px;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                url('path/to/dark-texture.png');
+}
+
+.chat-input {
+    flex: 0 0 auto;
+    position: relative; /* Cambiado de absolute a relative */
+    bottom: auto; /* Eliminado el bottom: 0 */
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(to top, #1a0000, #0a0000);
+    border-top: 1px solid #79000d;
+    display: flex;
+    gap: 10px;
+}
+
+/* Asegurarse de que los mensajes aparezcan correctamente */
 .message {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.3s ease;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #1a0000;
+    border-left: 3px solid #79000d;
+    border-radius: 0 5px 5px 0;
+    opacity: 1; /* Asegurarse de que los mensajes sean visibles */
+    transform: translateY(0); /* Reset de la transformación */
 }
 
 /* Animaciones */
